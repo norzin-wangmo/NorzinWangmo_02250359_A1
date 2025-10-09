@@ -29,7 +29,7 @@ def count_vowels(text: str) -> int:
 
 # 4. Average and Range Finder
 def average_and_range(numbers: list[float]) -> tuple[float, float]:
-    """Return the average and range (max – min) of the numbers."""
+    #Return the average and range (max – min) of the numbers.
     if not numbers:
         raise ValueError("The list of numbers cannot be empty.")
     avg = sum(numbers) / len(numbers)
@@ -39,7 +39,7 @@ def average_and_range(numbers: list[float]) -> tuple[float, float]:
 
 # 5. String Reverser with Word Count
 def reverse_and_count_words(text: str) -> tuple[str, int]:
-    """Return the reversed string and the word count (handling multiple spaces)."""
+    #Return the reversed string and the word count (handling multiple spaces).
     reversed_str = text[::-1]
     words = [w for w in text.split(" ") if w.strip() != ""]
     return reversed_str, len(words)
@@ -47,7 +47,7 @@ def reverse_and_count_words(text: str) -> tuple[str, int]:
 
 # 6. Specific Word Counter
 def specific_word_counter(file_url: str) -> dict:
-    """Count the occurrences of specific words ['is', 'are', 'has', 'have'] in a text file from URL."""
+   #Count the occurrences of specific words ['is', 'are', 'has', 'have'] in a text file from URL.
     try:
         with urllib.request.urlopen(file_url) as response:
             text = response.read().decode("utf-8").lower()
@@ -72,9 +72,15 @@ def main():
         print("6. Count specific words in text file")
         print("0. Exit program")
 
-        choice = input("Enter your choice: ").strip()
+        # Loop until valid choice is entered
+        while True:
+            choice = input("Enter your choice: ").strip()
+            if choice in {'0','1','2','3','4','5','6'}:
+                break
+            print("Invalid choice!. Please enter a number between 0 and 6.")
+
         if choice == '0':
-            print("Goodbye! 👋")
+            print("Goodbye!")
             break
 
         try:
@@ -110,17 +116,18 @@ def main():
                 for word, count in counts.items():
                     print(f"{word}: {count}")
 
-            else:
-                print("Invalid choice!. Please enter a number between 0 and 6.")
-
         except Exception as e:
             print(f" ! Error: {e}")
 
-        again = input("\nWould you like to try another function? (y/n): ").strip().lower()
-        if again != 'y':
-            print("Goodbye! :) ")
-            break
-
+        while True:
+            again = input("\nWould you like to try another function? (y/n): ").strip().lower()
+            if again == 'y':
+                break
+            elif again == 'n':
+                print("Goodbye! :) ")
+                return
+            else:
+                print("Invalid input! Please enter 'y' or 'n'.")
 
 if __name__ == "__main__":
     main()
